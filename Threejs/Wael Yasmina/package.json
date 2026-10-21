@@ -1,0 +1,27 @@
+{
+  "name": "wael-yasmina",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "^2.16.4",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10"
+  },
+  "allowScripts": {
+    "@parcel/watcher": false,
+    "@swc/core": false,
+    "lmdb": false,
+    "msgpackr-extract": false
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "opentype.js": "^2.0.0",
+    "three": "^0.186.1"
+  }
+}

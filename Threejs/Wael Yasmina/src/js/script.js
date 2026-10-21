@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import GUI from "dat.gui";
+import * as dat from "dat.gui";
 
 const renderer = new THREE.WebGLRenderer();
 
@@ -22,20 +22,40 @@ const orbit = new OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(2);
 scene.add(axesHelper);
 
-camera.position.set(0, 0, 0);
+camera.position.set(-10, 30, 5);
 orbit.update();
 
-const sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
-const SphereMaterial = new THREE.MeshBasicMaterial({
-  color: 0x0000ff,
-  wireframe: true,
+const boxGeometry = new THREE.BoxGeometry();
+const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const box = new THREE.Mesh(boxGeometry, boxMaterial);
+scene.add(box);
+
+const planeGeometry = new THREE.PlaneGeometry(30, 30);
+const planeMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  side: THREE.DoubleSide,
 });
-const sphere = new THREE.Mesh(sphereGeometry, SphereMaterial);
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+scene.add(plane);
+plane.rotation.x = -0.5 * Math.PI;
+
+const gridHelper = new THREE.GridHelper(30);
+scene.add(gridHelper);
+
+const sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+const sphereMaterial = new THREE.MeshBasicMaterial({
+  color: 0x0000ff,
+});
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
 
 sphere.position.set(-10, 10, 0);
 
-const gui = new GUI();
+const ambientLight = new THREE.AmbientLight(0x333333);
+scene.add(ambientLight);
+
+const gui = new dat.GUI();
+
 const options = {
   sphereColor: "#ffea00",
 };
@@ -44,7 +64,15 @@ gui.addColor(options, "sphereColor").onChange(function (e) {
   sphere.material.color.set(e);
 });
 
-function animate() {
+let step = 0;
+let speed = 0.01;
+
+function animate(time) {
+  box.rotation.x = time / 1000;
+  box.rotation.y = time / 1000;
+
+  step += speed;
+  sphere.position.y = 10 * Math.abs(Math.sin(step));
   renderer.render(scene, camera);
 }
 

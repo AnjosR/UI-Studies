@@ -1,13 +1,11 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 const renderer = new THREE.WebGLRenderer();
-
 renderer.setSize(window.innerWidth, window.innerHeight);
-
 document.body.appendChild(renderer.domElement);
-
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
@@ -21,7 +19,6 @@ const orbit = new OrbitControls(camera, renderer.domElement);
 
 const axesHelper = new THREE.AxesHelper(2);
 scene.add(axesHelper);
-
 camera.position.set(-10, 30, 5);
 orbit.update();
 

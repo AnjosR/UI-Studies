@@ -162,7 +162,7 @@ function updateView() {
   const h = container.clientHeight;
   camera.aspect = w / h;
   // offset positivo move a cena para a esquerda/cima
-  camera.setViewOffset(w, h, w * 0.25, h * 0.2, w, h);
+  camera.setViewOffset(w, h, w * 0.30, h * 0.2, w, h);
   camera.updateProjectionMatrix();
   renderer.setSize(w, h);
 }
